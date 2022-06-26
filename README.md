@@ -31,33 +31,14 @@ Here is an overview of the files included in the repository:
 __X:__ ___{array-like, sparse matrix} of shape (N, N_p)___   
 
 
-## Walk-likelihood algorithm (WLA):
+## lens:
 ```def WLA(self, m=None, U=None, init='NMF', lm=8, max_iter_WLA=100, thr_WLA=0.99, eps=0.00000001)```
 ### Parameters: 
+The parameters are same as used in kepler mapper.
 __m:__ ___int, default=None___   
 The number of communities for the partition of the network. Not required if initialization is custom.
 
-__U:__ ___ndarray of shape (N, m), default=None___   
-The matrix U refers to the initialization of the partition of the network of size N into m communities, only required to be specified if the intialization is custom.
-
-__init:__ ___{'NMF', 'random', 'custom' }, default='NMF'___   
-The method to initialize U: the partition of the network of size N into m communities for WLA. If U is provided, then the initialization is set to custom.
-
-__l_max:__ ___int, default=8___   
-The length of random-walks
-
-__max_iter_WLA:__ ___int, default=100___   
-The maximum number of iterations for WLA
-
-__thr_WLA:__ ___float, default=0.99___   
-The halting threshold for WLA
-
-__eps:__ ___float, default=0.00000001___   
-The lowest accepted non-zero value
-
 ### Attributes:
-
-The following attributes of a network are obtained by WLA.
 
 __N:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The number of nodes in the network.
 
@@ -101,28 +82,14 @@ array([4, 1, 4, 4, 2, 1, 1, 3, 4, 1, 4, 2, 0, 1, 0, 2, 0, 1, 2, 3, 4, 2,
 
 
 
-## Walk-likelihood Community Finder (WLCF):
-```def WLCF(self, U=None, max_iter_WLCF=50, thr_WLCF=0.99, bifurcation_type='random', **WLA_params)```
-### Parameters:
-
-__U:__ ___ndarray of shape (N, m), default=None___   
-The matrix U refers to the initialization of the partition of the network of size N into m communities, not required generally. 
-
-__max_iter_WLCF:__ ___int, default=50___   
-The maximum number of iterations for WLCF
-
-__thr_WLCF:__ ___float, default=0.99___   
-The halting threshold for WLCF
-
-__bifurcation_type:__ ___{'random', 'NMF'}, default=random___   
-The method used for initilizing bifurcation.
-
-__**WLA_params:__   
-The parameters that need to be specified to the Walk-likelihood Algorithm that will be used by WLCF
+## get_mapper_graph:
+```def WLA(self, m=None, U=None, init='NMF', lm=8, max_iter_WLA=100, thr_WLA=0.99, eps=0.00000001)```
+### Parameters: 
+The parameters are same as used in kepler mapper.
+__m:__ ___int, default=None___   
+The number of communities for the partition of the network. Not required if initialization is custom.
 
 ### Attributes:
-
-The following attributes of a network are obtained by WLCF.
 
 __N:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The number of nodes in the network.
 
@@ -137,6 +104,7 @@ __comm_id:__ &nbsp; &nbsp; &nbsp; &nbsp; The community identity of each node for
 __communities:__ &nbsp;  A dictionary of communities with value as the nodes that belong to the community.
 
 __modularity:__ &nbsp; &nbsp; &nbsp; The modularity of the partition of the network.
+
 ### Example
 
 ```
