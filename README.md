@@ -1,6 +1,6 @@
 # Mapper_plus
 
-(c) 2022 Esha Datta & Aditya Ballal
+(c) 2022 Esha Datta, Aditya Ballal & Leighton T. Izu
 
 Description
 
