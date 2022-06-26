@@ -13,7 +13,7 @@ Required modules:
 - scipy
 - sklearn
 - walk-likelihood methods (file attached)
-- mapper plus (link to installation)
+- kepler mapper (link to installation)
 
 # Overview
 
