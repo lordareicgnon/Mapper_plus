@@ -74,7 +74,7 @@ class mapper_plus():
 
             U=np.zeros((self.N,self.m+len(a-b)))
             if (len(a-b)>0):
-                U[list(a-b),m+np.array(range(len(a-b)))]=1
+                U[list(a-b),self.m+np.array(range(len(a-b)))]=1
             mn=0
             for cm in self.overlapping_clusters:
                 for i in cm:
