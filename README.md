@@ -15,14 +15,13 @@ Required modules:
 - numpy
 - scipy
 - sklearn
-- walk-likelihood methods (file attached)
 - kepler mapper (Can be pip installed with command 'pip install kmapper'. For other options, see: https://kepler-mapper.scikit-tda.org/en/latest/started.html)
 
 # Overview
 
 Here is an overview of the files included in the repository:
-1. ```walk_likelihood.py```: File that defines the class walk_likelihood.
-2. ```mapper_plus.py```: 
+1. ```mapper_plus.py```: 
+2. ```walk_likelihood.py```: File that defines the class walk_likelihood.
 3. ```example.ipynb```: Jupyter notebook which explains the usage of the mapper plus.
 
 # class mapper_plus
