@@ -2,7 +2,10 @@
 
 (c) 2022 Esha Datta, Aditya Ballal & Leighton T. Izu
 
-Description
+The Mapper Plus data pipeline is an extension of the existing Mapper algorithm which uses WLCF to get cluster assignments from a Mapper graph. We use the existing Mapper implementation provided by KeplerMapper in order to get a Mapper graph and then apply WLCF to get overlapping and disjoint clusters. 
+
+More information on KeplerMapper can be found here: https://kepler-mapper.scikit-tda.org/en/latest/index.html
+
 
 # Installation
 
@@ -13,7 +16,7 @@ Required modules:
 - scipy
 - sklearn
 - walk-likelihood methods (file attached)
-- kepler mapper (link to installation)
+- kepler mapper (Can be pip installed with command 'pip install kmapper'. For other options, see: https://kepler-mapper.scikit-tda.org/en/latest/started.html)
 
 # Overview
 
