@@ -37,25 +37,19 @@ get_mapper_graph produces the first step of the Mapper Plus data pipeline, which
 
 
 ### Parameters: 
-The parameters are same as used in kepler mapper.
-__m:__ ___int, default=None___   
-The number of communities for the partition of the network. Not required if initialization is custom.
+The parameters are same as used in kepler mapper. Some of the important parameters are
 
 ### Attributes:
 
-__N:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The number of nodes in the network.
+__data:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The dataset on which mapper plus is used.
 
-__m:__	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The number of communities the network is partitioned into.
+__N:__	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The size of the dataset.
 
-__w:__  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The outward rate of each node specified in a 1-dimensional array of size N .
+__mapper_graph:__  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The Mapper graph produced by kepler mapper where the nodes are clusters of obseravtions in your dataset and edges connect nodes that share obseravtions stored in a dictionary. See KeplerMapper for more description. 
 
-__U:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The optimal partition of the network of size N into m communities specified in a 2-dimensional array of size N X m.
+__Nb:__&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The total number of nodes in the mapper graph.
 
-__comm_id:__ &nbsp; &nbsp; &nbsp; &nbsp; The community identity of each node for the partition of the network, specified in a 1-dimensional array of size N.
-
-__communities:__ &nbsp;  A dictionary of communities with value as the nodes that belong to the community.
-
-__modularity:__ &nbsp; &nbsp; &nbsp; The modularity of the partition of the network.
+__A:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The adjucancy matrix of the mapper graph specified in a 2-dimensional array of size Nb X Nb.
 
 ### Example
 
