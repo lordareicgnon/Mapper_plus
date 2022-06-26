@@ -9,18 +9,14 @@ import importlib
 mapper = km.KeplerMapper(verbose=1)
 
 class mapper_plus():
-    def __init__(self, data):
-        self.data=data
-        self.N=len(self.data)
+    def __init__(self):
         self.mapper_graph_found=0
         self.overlapping_clusters_found=0
-    def lens(self,**kwargs):
-        self.lens = mapper.fit_transform(self.data,**kwargs)
 
-    #def get_mapper_graph(self,n_cubes,percentage_overlap,**args):
-    #    self.mapper_graph = mapper.map(self.lens,self.data,cover=km.Cover(n_cubes=n_cubes, perc_overlap=percentage_overlap),**args)
-    def get_mapper_graph(self,cover,**args):
-        self.mapper_graph = mapper.map(self.lens,self.data,cover=cover,**args)
+    def get_mapper_graph(self,lens,data,**kepler_mapper_args):
+        self.mapper_graph = mapper.map(lens,data,**kepler_mapper_args)
+        self.data=data
+        self.N=len(self.data)
         self.Ng=len(self.mapper_graph['nodes'])
         self.A=np.zeros((self.Ng,self.Ng))
         i=-1
@@ -84,11 +80,6 @@ class mapper_plus():
                 for i in cm:
                     U[i,mn]=1
                 mn+=1
-            mn=0
-            for cm in self.overlapping_clusters:
-                for i in cm:
-                    U[i,mn]=1
-                mn+=1
             model=wl.walk_likelihood(self.X)
             model.WLA(U=U,**WLA_args)
             self.non_overlapping_clusters=[]
@@ -96,7 +87,7 @@ class mapper_plus():
             self.comm_id=model.comm_id
             for i in range(self.m):
                 self.non_overlapping_clusters.append(list(index[model.comm_id==i]))
-            print('We found '+str(self.m)+' non-overlapping clusters')    
+            print('We found '+str(self.m)+' non-overlapping clusters')
             return model
         else:
             print('First find overlapping clusters')
