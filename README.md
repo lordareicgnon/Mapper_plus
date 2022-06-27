@@ -59,7 +59,7 @@ __A:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb
 This function clusters the nodes of the Mapper graph into communities using WLCF, which in turn clusters the original data into overlapping communities. This function can only be used if the mapper graph is obtained using the function get_mapper_graph.
 
 ### Parameters: 
-The parameters are same as used in WLCF.
+The parameters are same as used in Walk-likelihood Community Finder. For details go to https://github.com/lordareicgnon/Walk_likelihood.
 
 ### Attributes:
 
@@ -74,44 +74,82 @@ __m:__&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs
 
 ## get_non_overlapping_clusters:
 ```def get_non_overlapping_clusters(**WLA_args)```
-get_mapper_graph produces the first step of the Mapper Plus data pipeline, which is the Mapper graph. The nodes are clusters of obseravtions in your dataset and edges connect nodes that share obseravtions. This function implements on the KeplerMapper method map to produce a graph.
-
+This function clusters each observations into overlapping communities based on their previous non-overlapping community assignment and the mapper graph. This function can only be used if the mapper graph is obtained using the function get_overlapping_clusters.
 
 ### Parameters: 
-The parameters are same as used in kepler mapper. Some of the important parameters are
+The parameters are same as used in Walk-likelihood Algortihm. For details go to https://github.com/lordareicgnon/Walk_likelihood.
+
 
 ### Attributes:
 
-__data:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The dataset on which mapper plus is used.
+__comm_id:__ &nbsp; Community identity of each observation specified in a 1-dimensional array of size Nb.
 
-__N:__	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The size of the dataset.
+__non_overlapping_clusters:__ &nbsp; &nbsp; &nbsp; &nbsp; A list of the non-overlapping clusters of the original dataset where each entry of this list is a list of observations belonging to that cluster.
 
-__mapper_graph:__  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The Mapper graph produced by kepler mapper where the nodes are clusters of obseravtions in your dataset and edges connect nodes that share obseravtions stored in a dictionary. See KeplerMapper for more description. 
-
-__m:__&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The total number of overlapping clusters.
+__m:__&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The total number of non-overlapping clusters.
 
 
 ### Example
 
+Importing all necessary packages
 ```
+>>> import pandas as pd
 >>> import numpy as np
->>> from walk_likelihood import walk_likelihood
->>> X=np.load('Sample_networks/dolphins.npy')
->>> model=walk_likelihood(X)
->>> model.WLCF()
->>> model.N
-62
->>> model.m
-4
->>> model.communities
-{'Community 0': [1, 5, 6, 7, 9, 13, 17, 19, 22, 25, 26, 27, 31, 32, 39, 41, 48, 54, 56, 57, 60], 
-'Community 1': [4, 11, 15, 18, 21, 23, 24, 29, 35, 45, 51, 55], 
-'Community 2': [3, 8, 12, 14, 16, 20, 33, 34, 36, 37, 38, 40, 43, 44, 46, 49, 50, 52, 53, 58, 59, 61], 
-'Community 3': [0, 2, 10, 28, 30, 42, 47]}
->>> model.comm_id
-array([3, 0, 3, 2, 1, 0, 0, 0, 2, 0, 3, 1, 2, 0, 2, 1, 2, 0, 1, 0, 2, 1,
-       0, 1, 1, 0, 0, 0, 3, 1, 3, 0, 0, 2, 2, 1, 2, 2, 2, 0, 2, 0, 3, 2,
-       2, 1, 2, 3, 0, 2, 2, 1, 2, 2, 0, 1, 0, 0, 2, 2, 0, 2])
->>> model.modularity
-0.5202919188323247
+>>> import sklearn
+>>> import mapper_plus as mp 
+>>> import kmapper as km 
+>>> from sklearn.decomposition import PCA 
+```
+
+Load in dataset
+```
+>>> X=np.load('Abalone_standardized.npy')
+>>> X.shape
+(4177, 8)
+```
+
+Using PCA lens on the data
+```
+>>> mapper = km.KeplerMapper(verbose=1)
+KeplerMapper(verbose=1)
+>>> lens = mapper.fit_transform(X,projection=PCA(n_components=2))
+..Composing projection pipeline of length 1:
+	Projections: PCA(n_components=2)
+	Distance matrices: False
+	Scalers: MinMaxScaler()
+..Projecting on data shaped (4177, 8)
+
+..Projecting data using: 
+	PCA(n_components=2)
+
+
+..Scaling with: MinMaxScaler()
+```
+
+Specifying cover
+```
+>>> cover = km.Cover(n_cubes = 10, perc_overlap = 0.7)
+```
+
+Obtaining mapper graph using mapper plus
+```
+>>> model=mp.mapper_plus()
+>>> model.get_mapper_graph(lens,X,cover=cover,clusterer=sklearn.cluster.KMeans(n_clusters=2, random_state=1618033),)
+Mapping on data shaped (4177, 8) using lens shaped (4177, 2)
+
+Creating 100 hypercubes.
+
+Created 1558 edges and 162 nodes in 0:00:02.477715.
+```
+
+Finding overlapping clusters
+```
+>>> model.get_overlapping_clusters()
+We found 7 overlapping clusters
+```
+
+Finding non-overlapping clusters
+```
+>>> model.get_non_overlapping_clusters()
+We found 7 non-overlapping clusters
 ```
