@@ -36,7 +36,7 @@ Here is an overview of the files included in the repository:
 ## get_mapper_graph:
 ```def get_mapper_graph(self,lens,data,**kepler_mapper_args)```
 
-This function produces the first step of the Mapper Plus data pipeline, which is the Mapper graph. The nodes are clusters of obseravtions in your dataset and edges connect nodes that share obseravtions. This function implements on the KeplerMapper method map to produce a graph.
+This function produces the first step of the Mapper Plus data pipeline, which is the Mapper graph. The nodes are clusters of obseravtions in your dataset and edges connect nodes that share obseravtions. This function implements the KeplerMapper method map to produce a graph.
 
 
 ### Parameters: 
