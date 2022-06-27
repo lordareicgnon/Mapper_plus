@@ -69,8 +69,11 @@ __comm_id_mapper_nodes:__ &nbsp; Community identity of each node of the mapper g
 
 __overlapping_clusters:__ &nbsp; &nbsp; &nbsp; &nbsp; A list of the corresponding overlapping clusters of the original dataset where each entry of this list is a list of observations belonging to that cluster.
 
+__m:__&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The total number of overlapping clusters.
+
+
 ## get_non_overlapping_clusters:
-```def get_mapper_graph(self,lens,data,**kepler_mapper_args)```
+```def get_non_overlapping_clusters(**WLA_args)```
 get_mapper_graph produces the first step of the Mapper Plus data pipeline, which is the Mapper graph. The nodes are clusters of obseravtions in your dataset and edges connect nodes that share obseravtions. This function implements on the KeplerMapper method map to produce a graph.
 
 
@@ -85,10 +88,7 @@ __N:__	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb
 
 __mapper_graph:__  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The Mapper graph produced by kepler mapper where the nodes are clusters of obseravtions in your dataset and edges connect nodes that share obseravtions stored in a dictionary. See KeplerMapper for more description. 
 
-__Nb:__&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The total number of nodes in the mapper graph.
-
-__A:__ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The adjucancy matrix of the mapper graph specified in a 2-dimensional array of size Nb X Nb.
-
+__m:__&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The total number of overlapping clusters.
 
 
 ### Example
