@@ -43,15 +43,15 @@ The parameters are same as used in kepler mapper. Some of the important paramete
 
 ### Attributes:
 
-__data:__ &nbsp; &nbsp; The dataset on which mapper plus is used.
+__data:__ &nbsp; &nbsp; &nbsp; &nbsp; The dataset on which mapper plus is used.
 
-__N:__	&nbsp; &nbsp; The size of the dataset.
+__N:__	&nbsp; &nbsp; &nbsp; &nbsp; The size of the dataset.
 
 __mapper_graph:__  &nbsp; The Mapper graph produced by kepler mapper where the nodes are clusters of obseravtions in your dataset and edges connect nodes that share obseravtions stored in a dictionary. See KeplerMapper for more description. 
 
-__Nb:__&nbsp; &nbsp; The total number of nodes in the mapper graph.
+__Nb:__&nbsp; &nbsp; &nbsp; &nbsp; The total number of nodes in the mapper graph.
 
-__A:__ &nbsp; &nbsp; The adjacency matrix of the mapper graph specified in a 2-dimensional array of size Nb X Nb.
+__A:__ &nbsp; &nbsp; &nbsp; &nbsp; The adjacency matrix of the mapper graph specified in a 2-dimensional array of size Nb X Nb.
 
 ## get_overlapping_clusters:
 ```def get_mapper_graph(self,lens,data,**kepler_mapper_args)```
