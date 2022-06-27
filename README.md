@@ -23,7 +23,7 @@ Required modules:
 # Overview
 
 Here is an overview of the files included in the repository:
-1. ```mapper_plus.py```: 
+1. ```mapper_plus.py```: File that contains the implementation of mapper plus.
 2. ```walk_likelihood.py```: File that defines the class walk_likelihood.
 3. ```example.ipynb```: Jupyter notebook which explains the usage of the mapper plus.
 
