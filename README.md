@@ -41,7 +41,7 @@ This function produces the first step of the Mapper Plus data pipeline, which is
 
 ### Parameters: 
 The parameters are same as used in the kepler mapper method map. Some of the important parameters are:
-- lens (numpy array): define a m-by-n array that is an n-dimensional representation of your m observations of data. This is typically the output of a fit_transform command
+- lens (numpy array): define a N-by-M array that is an M-dimensional representation of your N observations of data. This is typically the output of a fit_transform command
 - data (numpy array): dataset to run clustering on 
 - clusterer (Default: DBSCAN): provide your choice of a scikit-learn API compatible clustering algorithm that provides both fit and predict
 - cover (kmapper.Cover): define the cover scheme for your lens, refer to Kepler Mapper documentation for full details   
