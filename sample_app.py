@@ -4,7 +4,7 @@ import numpy as np
 st.write("""
 # Mapper Plus
 """)
-from mapper_plus import mapper_plus
+#from mapper_plus import mapper_plus
 st.write("Write description of mapper plus here")
 
 #import kmapper as km
