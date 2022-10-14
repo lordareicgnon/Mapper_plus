@@ -1,4 +1,4 @@
-numpy
-sklearn
-pandas
-kmapper
+pip install numpy
+pip install sklearn
+pip install pandas
+pip install kmapper
