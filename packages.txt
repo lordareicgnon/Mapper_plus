@@ -1,4 +1,5 @@
-apt-get numpy
+streamlit
+numpy
 sklearn
 pandas
 kmapper
