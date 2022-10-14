@@ -72,13 +72,13 @@ if uploaded_file or Wine_data:
     'BIRCH':sklearn.cluster.Birch}#,
     #'Bisecting K-Means':sklearn.cluster.BisectingKMeans}
     clusterer_name=cols2[0].selectbox("Clustering Method :", list(clusterers.keys()), index=0)
-    no_num_clusterer={'DBSCAN','Affinity propagation','Mean-shift','OPTICS'}
+    no_num_clusterer={'DBSCAN','Affinity Propagation','Mean-shift','OPTICS'}
     if clusterer_name not in no_num_clusterer:
         n_cluster=cols2[1].number_input('Number of clusters',min_value=1, max_value=100,step=1,value=2)
     if clusterer_name not in no_num_clusterer:
         clusterer= clusterers[clusterer_name](n_clusters=n_cluster)
     else:
-        clusterer= clusterers[cluster_name]()
+        clusterer= clusterers[clusterer_name]()
     #st.write(clusterers[clusterer])
     st.markdown("### Gain and Resolution")
     cols = st.columns((1, 1))
