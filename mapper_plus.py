@@ -7,11 +7,6 @@ from sklearn.decomposition import PCA
 import walk_likelihood as wl
 import importlib
 from sklearn.metrics.cluster import normalized_mutual_info_score as nmi
-import skfuzzy as fuzz
-import sys
-import argparse
-import datetime
-from time import time
 mapper = km.KeplerMapper(verbose=1)
 
 class easy_dot():
