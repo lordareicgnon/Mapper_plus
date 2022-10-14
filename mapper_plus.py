@@ -21,6 +21,7 @@ class mapper_plus():
     def __init__(self,verbose=1):
         self.mapper_graph_found=0
         self.overlapping_clusters_found=0
+        self.verbose=verbose
 
     def get_mapper_graph(self,lens,data,**kepler_mapper_args):
         self.lens=lens
@@ -63,7 +64,7 @@ class mapper_plus():
             self.overlapping_clusters=[list(np.where(self.U[:,i]>0)[0]) for i in range(model.m)]
             self.overlapping_clusters_found=1
             self.m=model.m
-            if verbose:
+            if self.verbose:
                 print('We found '+str(self.m)+' overlapping clusters \n',end='\r')
             return model
         else:
@@ -93,12 +94,12 @@ class mapper_plus():
             for i in range(self.m):
 
                 self.non_overlapping_clusters.append(list(index[model.comm_id==i]))
-            if verbose:
+            if self.verbose:
                 print('We found '+str(self.m)+' non-overlapping clusters \n',end='\r')
             if len(diff)>0:
                 self.outliers=list(diff)
                 print('We found '+str(len(diff))+' outliers',end='\r')
             return model
         else:
-            if verbose:
+            if self.verbose:
                 print('First find overlapping clusters')
