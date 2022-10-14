@@ -1,4 +1,4 @@
-numpy
+apt-get numpy
 sklearn
 pandas
 kmapper
