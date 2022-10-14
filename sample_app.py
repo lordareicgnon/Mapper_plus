@@ -75,10 +75,13 @@ if uploaded_file or Wine_data:
     no_num_clusterer={'DBSCAN','Affinity Propagation','Mean-shift','OPTICS'}
     if clusterer_name not in no_num_clusterer:
         n_cluster=cols2[1].number_input('Number of clusters',min_value=1, max_value=100,step=1,value=2)
-    if clusterer_name not in no_num_clusterer:
-        clusterer= clusterers[clusterer_name](n_clusters=n_cluster)
-    else:
+    if clusterer_name in no_num_clusterer:
         clusterer= clusterers[clusterer_name]()
+    elif clusterer_name=='Gaussian mixtures':
+        clusterer= clusterers[clusterer_name](n_components=n_cluster)
+    else:
+        clusterer= clusterers[clusterer_name](n_clusters=n_cluster)
+
     #st.write(clusterers[clusterer])
     st.markdown("### Gain and Resolution")
     cols = st.columns((1, 1))
