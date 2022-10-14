@@ -60,7 +60,7 @@ clusterer_name=cols2[0].selectbox("Clustering Method :", list(clusterers.keys())
 no_num_clusterer={'DBSCAN','Affinity propagation','Mean-shift','OPTICS'}
 if clusterer_name not in no_num_clusterer:
     n_cluster=cols2[1].number_input('Number of clusters',min_value=1, max_value=100,step=1,value=2)
-if cluster_name not in clusters:
+if clusterer_name not in clusters:
     clusterer= clusterers[cluster_name](n_clusters=n_cluster)
 else:
     clusterer= clusterers[cluster_name]()
