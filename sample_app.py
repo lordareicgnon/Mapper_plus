@@ -3,6 +3,7 @@ import pandas as  pd
 import numpy as np
 import sklearn
 from mapper_plus import mapper_plus
+from download_button_file import download_button
 st.write("""
 # Mapper Plus
 """)
@@ -97,57 +98,59 @@ if uploaded_file or Wine_data:
     with st.form(key="my_form"):
 
         run=st.form_submit_button(label="Run Mapper Plus")
-    if not run:
-        st.stop()
-    N=X.shape[0]
-    import kmapper as km
-    mapper=km.KeplerMapper()
-    lens=np.zeros((N,0))
-    if "PCA" in lenses:
-        from sklearn.decomposition import PCA
-        #st.write(X)
-        lens1 = mapper.fit_transform(X,projection=PCA(n_components=n_comps_PCA))
-        lens=np.concatenate((lens,lens1),axis=1)
-    if "L2 Norm" in lenses:
-        lens2 = mapper.fit_transform(X,projection='l2norm')
-        lens = np.concatenate((lens,lens2),axis=1)
-    if "IsolationForest" in lenses:
-        from sklearn import ensemble
-        isomodel = ensemble.IsolationForest(random_state=1729)
-        isomodel.fit(X)
-        lens3 = isomodel.decision_function(X).reshape((X.shape[0], 1))
-        lens = np.concatenate((lens,lens3),axis=1)
+    if run:
+        #st.stop()
+        N=X.shape[0]
+        import kmapper as km
+        mapper=km.KeplerMapper()
+        lens=np.zeros((N,0))
+        if "PCA" in lenses:
+            from sklearn.decomposition import PCA
+            #st.write(X)
+            lens1 = mapper.fit_transform(X,projection=PCA(n_components=n_comps_PCA))
+            lens=np.concatenate((lens,lens1),axis=1)
+        if "L2 Norm" in lenses:
+            lens2 = mapper.fit_transform(X,projection='l2norm')
+            lens = np.concatenate((lens,lens2),axis=1)
+        if "IsolationForest" in lenses:
+            from sklearn import ensemble
+            isomodel = ensemble.IsolationForest(random_state=1729)
+            isomodel.fit(X)
+            lens3 = isomodel.decision_function(X).reshape((X.shape[0], 1))
+            lens = np.concatenate((lens,lens3),axis=1)
 
-    ranonce=1
-    cover = km.Cover(n_cubes = resolution, perc_overlap = gain)
-    model=mapper_plus()
-    st.write("....... Running")
-    st.write("....... Finding Mapper Graph")
-    model.get_mapper_graph(lens,X,cover=cover,clusterer=clusterer,)
-    st.write("....... Finding overlapping clusters")
-    model.get_overlapping_clusters()
-    st.write("##### "+str(len(model.overlapping_clusters))+" overlapping clusters found")
-    overlap_str=''
-    for comms in range(len(model.overlapping_clusters)):
-        if comms>0:
-            overlap_str+='\n'
-        overlap_str+='Cluster '+str(comms+1)+','
-        with st.expander("Cluster "+str(comms+1)):
-            st.write(str(model.overlapping_clusters[comms])[1:-1])
-        overlap_str+=str(model.overlapping_clusters[comms])[1:-1]
-    st.download_button('Download Overlapping Clusters', overlap_str,file_name='overlapping_clusters_'+file_name)
-    st.write("....... Finding disjoint clusters")
-    model.get_non_overlapping_clusters(new_method=1)
-    st.write("##### "+str(len(model.non_overlapping_clusters))+" disjoint clusters found")
-    disjoint_str=''
-    for comms in range(len(model.non_overlapping_clusters)):
-        if comms>0:
-            disjoint_str+='\n'
-        disjoint_str+='Cluster '+str(comms+1)+','
-        with st.expander("Cluster "+str(comms+1)):
-            st.write(str(model.non_overlapping_clusters[comms])[1:-1])
-            disjoint_str+=str(model.non_overlapping_clusters[comms])[1:-1]
-    st.download_button('Download Disjoint Clusters', overlap_str,file_name='disjoint_clusters_'+file_name)
+        ranonce=1
+        cover = km.Cover(n_cubes = resolution, perc_overlap = gain)
+        model=mapper_plus()
+        st.write("....... Running")
+        st.write("....... Finding Mapper Graph")
+        model.get_mapper_graph(lens,X,cover=cover,clusterer=clusterer,)
+        st.write("....... Finding overlapping clusters")
+        model.get_overlapping_clusters()
+        st.write("##### "+str(len(model.overlapping_clusters))+" overlapping clusters found")
+        model.get_non_overlapping_clusters(new_method=1)
+        overlap_str=''
+        for comms in range(len(model.overlapping_clusters)):
+            if comms>0:
+                overlap_str+='\n'
+            overlap_str+='Cluster '+str(comms+1)+','
+            with st.expander("Cluster "+str(comms+1)):
+                st.write(str(model.overlapping_clusters[comms])[1:-1])
+            overlap_str+=str(model.overlapping_clusters[comms])[1:-1]
+        #st.download_button('Download Overlapping Clusters', overlap_str,file_name='overlapping_clusters_'+file_name)
+        csvbutton=download_button(overlap_str, 'overlapping_clusters_'+file_name, 'Download Overlapping Clusters')
+        #st.write(csvbutton)
+        st.write("....... Finding disjoint clusters")
+        st.write("##### "+str(len(model.non_overlapping_clusters))+" disjoint clusters found")
+        disjoint_str=''
+        for comms in range(len(model.non_overlapping_clusters)):
+            if comms>0:
+                disjoint_str+='\n'
+            disjoint_str+='Cluster '+str(comms+1)+','
+            with st.expander("Cluster "+str(comms+1)):
+                st.write(str(model.non_overlapping_clusters[comms])[1:-1])
+                disjoint_str+=str(model.non_overlapping_clusters[comms])[1:-1]
+        download_button( overlap_str,'disjoint_clusters_'+file_name,'Download Disjoint Clusters')
 
     #st.write("These are overlapping clusters")
     #st.write(model.overlapping_clusters)
