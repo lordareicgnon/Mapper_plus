@@ -6,9 +6,22 @@ from mapper_plus import mapper_plus
 from download_button_file import download_button
 st.write("""
 # Mapper Plus
+\n
+(c) 2022 Esha Datta, Aditya Ballal, Javier Lopez & Leighton T. Izu
+\n
+The Mapper Plus data pipeline is an extension of the algorithm Mapper which is based on topogical data analysis (TDA). Mapper Plus uses a community detection algorithm WLCF, first introduced by one is us, to get cluster assignments from a Mapper graph. We use the existing Mapper implementation provided by KeplerMapper in order to get a Mapper graph and then apply WLCF to get overlapping and disjoint clusters.
+\n
+More information on KeplerMapper can be found here: https://kepler-mapper.scikit-tda.org/en/latest/index.html
+\n
+More information on WLCF can be found here:
+\n
+- arxviv link: https://arxiv.org/abs/2202.11171
+\n
+- github code: https://github.com/lordareicgnon/Walk_likelihood
+
 """)
 
-st.write("Write description of mapper plus here")
+#st.write("Write description of mapper plus here")
 
 #import kmapper as km
 
