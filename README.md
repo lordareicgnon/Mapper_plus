@@ -1,6 +1,6 @@
 # Mapper_plus
 
-(c) 2022 Esha Datta, Aditya Ballal & Leighton T. Izu
+(c) 2022 Esha Datta, Aditya Ballal, Javier Lopez & Leighton T. Izu
 
 The Mapper Plus data pipeline is an extension of the algorithm Mapper which is based on topogical data analysis (TDA). Mapper Plus uses a community detection algorithm WLCF, first introduced by one is us, to get cluster assignments from a Mapper graph. We use the existing Mapper implementation provided by KeplerMapper in order to get a Mapper graph and then apply WLCF to get overlapping and disjoint clusters. 
 
