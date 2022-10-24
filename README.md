@@ -22,9 +22,9 @@ Required modules:
 
 In order to install the streamlit app of MapperPlus follow the steps below
 1. Download the repository
-2. Open Terminal at the folder
-3. pip install -r requirements.txt
-4. streamlit run sample_app.py
+2. Open Terminal at the folder and use the following commands
+- pip install -r requirements.txt
+- streamlit run sample_app.py
 
 # Overview
 
