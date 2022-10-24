@@ -20,6 +20,12 @@ Required modules:
 - sklearn
 - kepler mapper (Can be pip installed with command 'pip install kmapper'. For other options, see: https://kepler-mapper.scikit-tda.org/en/latest/started.html)
 
+In order to install the streamlit app of mapper-plus follow the steps below
+1. Download the repository
+2. Open Terminal at the folder
+3. pip install -r requirements.txt
+4. streamlit run sample_app.py
+
 # Overview
 
 Here is an overview of the files included in the repository:
