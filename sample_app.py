@@ -26,6 +26,9 @@ with st.expander("More Information"):
 
     """)
 
+#with st.sidebar:
+#    with st.expander("More information on parameters"):
+#        st.write("This is more information on parameters")
 
 #ranonce=0
 #runmapperplus = st.checkbox("Run MapperPlus", False)
@@ -35,9 +38,12 @@ if runmapperplus:
     st.markdown("## Upload data for Clustering")
     see_results=0
     uploaded_file='False'
+    with st.expander("ℹ️ More information"):
+        st.write("Upload data in CSV format with no headers.")
     #with st.sidebar:
     Wine_data = st.checkbox(
         "Use Sample Data", False, help="Wine Dataset")
+
 
     if not Wine_data:
 
@@ -65,7 +71,8 @@ if runmapperplus:
         st.markdown("## MapperPlus Parameters")
 
         st.markdown("### Lens")
-        st.info('Information about Lenses', icon="ℹ️")
+        with st.expander('ℹ️ More information'):
+            st.write("Lens is any function that projects the dataset into a lower dimension. We provide option of PCA, Isolation Forest and l2 norm for lens. Multiple lenses can be chosen.")
 
         Nl = st.number_input('Number of lenses',min_value=1, max_value=100,step=1,value=2)
         #submit = st.form_submit_button()#on_click=False)
@@ -88,7 +95,9 @@ if runmapperplus:
         import sklearn.cluster
         import sklearn.mixture
         st.markdown("### Clusterer")
-        st.info('Information about clusterers', icon="ℹ️")
+        with st.expander('ℹ️ More information'):
+            st.write("Clusterer is the clustering algorithm that MapperPlus applies within each cover. We provide the choice of 9 clustering algorithms:")
+            st.write("1. K-Means \n 2. Affinity Propagation \n 3. Mean-shift \n 4. Spectral Clustering \n 5. Agglomerative clustering \n 6. DBSCAN \n 7. OPTICS \n 8. Gaussian mixtures \n 9. BIRCH")
         #st.help('Hoho')
         cols2=st.columns((1, 1))
         clusterers={'K-Means':sklearn.cluster.KMeans,
@@ -113,11 +122,14 @@ if runmapperplus:
             clusterer= clusterers[clusterer_name](n_clusters=n_cluster)
 
         #st.write(clusterers[clusterer])
-        st.markdown("### Gain and Resolution")
-        st.info('Information about Gain and Resolution', icon="ℹ️")
+        st.markdown("### Resolution and Gain")
+        #st.info('Information about Gain and Resolution', icon="ℹ️")
+        with st.expander("""ℹ️ More Information"""):
+            st.write("MapperPlus takes two parameters as input: resolution and gain. The resolution determines the number of hypercubes used in the cover. The resolution can be viewd as “binning” the range of the lens. The gain determines the extent to which the hypercubes overlap , in turn determining the connectivity of the points in the dataset. The higher the gain, the more points will be shared by multiple pullback sets.")
         cols = st.columns((1, 1))
-        gain = cols[0].number_input('Gain',min_value=0.0000001, max_value=0.9999999,value=0.6)
-        resolution = cols[1].number_input('Resolution',min_value=1, max_value=100,step=1,value=8)
+        resolution = cols[0].number_input('Resolution',min_value=1, max_value=100,step=1,value=8)
+        gain = cols[1].number_input('Gain',min_value=0.0000001, max_value=0.9999999,value=0.6)
+        #new_method=st.checkbox('Use new method',False)
         with st.form(key="my_form"):
 
             run=st.form_submit_button(label="Run Mapper Plus")
@@ -144,6 +156,7 @@ if run:
 
     ranonce=1
     cover = km.Cover(n_cubes = resolution, perc_overlap = gain)
+    #model=mapper_plus(new_method=new_method)
     model=mapper_plus()
 
     st.write("....... Running")
@@ -157,8 +170,8 @@ if run:
     for comms in range(len(model.overlapping_clusters)):
         if comms>0:
             overlap_str+='\n'
-        overlap_str+='Cluster '+str(comms+1)+','
-        with st.expander("Cluster "+str(comms+1)):
+        overlap_str+='Cluster '+str(comms)+','
+        with st.expander("Cluster "+str(comms)):
             st.write(str(model.overlapping_clusters[comms])[1:-1])
         overlap_str+=str(model.overlapping_clusters[comms])[1:-1]
     #st.download_button('Download Overlapping Clusters', overlap_str,file_name='overlapping_clusters_'+file_name)
@@ -170,8 +183,8 @@ if run:
     for comms in range(len(model.non_overlapping_clusters)):
         if comms>0:
             disjoint_str+='\n'
-        disjoint_str+='Cluster '+str(comms+1)+','
-        with st.expander("Cluster "+str(comms+1)):
+        disjoint_str+='Cluster '+str(comms)+','
+        with st.expander("Cluster "+str(comms)):
             st.write(str(model.non_overlapping_clusters[comms])[1:-1])
             disjoint_str+=str(model.non_overlapping_clusters[comms])[1:-1]
     download_button( overlap_str,'disjoint_clusters_'+file_name,'Download Disjoint Clusters')
