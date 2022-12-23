@@ -190,6 +190,6 @@ if run:
     download_button( disjoint_str,'disjoint_clusters_'+file_name,'Download Disjoint Clusters')
     outliers = np.array(range(len(model.comm_id)))[model.comm_id==-1]
     if len(outliers)>0:
-        Print("We found "+str(len(outliers))+" outliers")
+        st.write("We found "+str(len(outliers))+" outliers")
         with st.expander("Outliers"):
             st.write(str(outliers)[1:-1])
