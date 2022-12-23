@@ -186,5 +186,5 @@ if run:
         disjoint_str+='Cluster '+str(comms)+','
         with st.expander("Cluster "+str(comms)):
             st.write(str(model.non_overlapping_clusters[comms])[1:-1])
-            disjoint_str+=str(model.non_overlapping_clusters[comms])[1:-1]
-    download_button( overlap_str,'disjoint_clusters_'+file_name,'Download Disjoint Clusters')
+        disjoint_str+=str(model.non_overlapping_clusters[comms])[1:-1]
+    download_button( disjoint_str,'disjoint_clusters_'+file_name,'Download Disjoint Clusters')
