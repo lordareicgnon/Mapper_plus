@@ -195,4 +195,4 @@ if run:
         else:    
             st.write("We found "+str(len(outliers))+" outliers")
         with st.expander("Outliers"):
-            st.write(str(outliers)[1:-1])
+            st.write(str(list(outliers))[1:-1])
