@@ -61,7 +61,7 @@ if runmapperplus:
             else:
                 df=pd.read_csv(uploaded_file,header=None)
 
-            st.write('### Following Data uploaded')
+            st.write('### Data uploaded')
 
             st.write(df)
             data=np.array(df)
