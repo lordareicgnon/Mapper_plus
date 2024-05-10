@@ -57,11 +57,14 @@ if runmapperplus:
             #data = np.loadtxt(uploaded_file, delimiter=',')
             head=st.checkbox("Contains headers", False)
             if head:
-                data=np.array(pd.read_csv(uploaded_file))
+                df=pd.read_csv(uploaded_file)
             else:
-                data=np.array(pd.read_csv(uploaded_file,header=None))
+                df=pd.read_csv(uploaded_file,header=None)
 
-            st.write(data)
+            st.write('### Following Data uploaded')
+
+            st.write(df)
+            data=np.array(df)
             file_name=uploaded_file.name
 
     else:
