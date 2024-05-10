@@ -41,7 +41,7 @@ if runmapperplus:
     see_results=0
     uploaded_file='False'
     with st.expander("ℹ️ More information"):
-        st.write("Upload data in CSV format with no headers.")
+        st.write("Upload data in CSV format.")
     #with st.sidebar:
     Wine_data = st.checkbox(
         "Use Sample Data", False, help="Wine Dataset")
@@ -55,7 +55,12 @@ if runmapperplus:
         if uploaded_file:
             #csvfile=StringIO(uploaded_file)
             #data = np.loadtxt(uploaded_file, delimiter=',')
-            data=np.array(pd.read_csv(uploaded_file,header=None))
+            head=st.checkbox("Contains headers", False)
+            if head:
+                data=np.array(pd.read_csv(uploaded_file))
+            else:
+                data=np.array(pd.read_csv(uploaded_file,header=None))
+
             st.write(data)
             file_name=uploaded_file.name
 
