@@ -4,6 +4,8 @@ import numpy as np
 import sklearn
 from mapper_plus import mapper_plus
 from download_button_file import download_button
+from io import StringIO
+import pandas as pd
 run=0
 st.write("""
 # MapperPlus Ⓒ \n
@@ -51,7 +53,9 @@ if runmapperplus:
         uploaded_file = st.file_uploader("Upload CSV", type=".csv")
         #st.write(uploaded_file)
         if uploaded_file:
-            data = np.loadtxt(uploaded_file, delimiter=',')
+            csvfile=StringIO(uploaded_file)
+            #data = np.loadtxt(uploaded_file, delimiter=',')
+            data=np.array(pd.read_csv(csvfile,header=None))
             file_name=uploaded_file.name
 
     else:
