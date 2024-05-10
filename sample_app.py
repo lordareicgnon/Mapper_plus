@@ -53,10 +53,10 @@ if runmapperplus:
         uploaded_file = st.file_uploader("Upload CSV", type=".csv")
         #st.write(uploaded_file)
         if uploaded_file:
-            print(uploaded_file)
             #csvfile=StringIO(uploaded_file)
             #data = np.loadtxt(uploaded_file, delimiter=',')
             data=np.array(pd.read_csv(uploaded_file,header=None))
+            print(data)
             file_name=uploaded_file.name
 
     else:
