@@ -54,9 +54,9 @@ if runmapperplus:
         #st.write(uploaded_file)
         if uploaded_file:
             print(uploaded_file)
-            csvfile=StringIO(uploaded_file)
+            #csvfile=StringIO(uploaded_file)
             #data = np.loadtxt(uploaded_file, delimiter=',')
-            data=np.array(pd.read_csv(csvfile,header=None))
+            data=np.array(pd.read_csv(uploaded_file,header=None))
             file_name=uploaded_file.name
 
     else:
