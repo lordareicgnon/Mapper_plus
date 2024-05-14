@@ -58,7 +58,7 @@ if runmapperplus:
             datacols = st.columns((1, 1, 1))
             transpose=datacols[0].checkbox("Transpose Data", False)
             head=datacols[1].checkbox("Contains headers", False)
-            ids=datacols[1].checkbox("Contains identifiers", False)
+            ids=datacols[2].checkbox("Contains indices", False)
             
             
 
@@ -73,8 +73,8 @@ if runmapperplus:
             if head:
                 df = df.rename(columns=df.iloc[0]).drop(df.index[0])
             if ids:
-                df = df.rename(rows=df.iloc[0]).drop(df.index[0])
-
+                df.set_index(df.iloc[0].values)
+                
             st.write('### Data Uploaded')
 
             st.write(df)
