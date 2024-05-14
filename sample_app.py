@@ -55,8 +55,9 @@ if runmapperplus:
         if uploaded_file:
             #csvfile=StringIO(uploaded_file)
             #data = np.loadtxt(uploaded_file, delimiter=',')
-            head=st.checkbox("Contains headers", False)
-            transpose=st.checkbox("Transpose Data", False)
+            datacols = st.columns((1, 1))
+            head=datacols[0].checkbox("Contains headers", False)
+            transpose=datacols[1].checkbox("Transpose Data", False)
             
 
             #if head:
