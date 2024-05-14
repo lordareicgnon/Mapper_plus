@@ -55,10 +55,12 @@ if runmapperplus:
         if uploaded_file:
             #csvfile=StringIO(uploaded_file)
             #data = np.loadtxt(uploaded_file, delimiter=',')
+            st.write('### Data Uploaded')
+            st.write('Check that each instance is a different row.')
             datacols = st.columns((1, 1, 1))
             transpose=datacols[0].checkbox("Transpose Data", False)
-            head=datacols[1].checkbox("Contains headers", False)
-            ids=datacols[2].checkbox("Contains indices", False)
+            head=datacols[1].checkbox("Contains Headers", False)
+            ids=datacols[2].checkbox("Contains Indices", False)
             
             
 
@@ -76,7 +78,6 @@ if runmapperplus:
                 df=df.set_index(df.columns.tolist()[0])
 
                 
-            st.write('### Data Uploaded')
 
             st.write(df)
             data=np.array(df)
