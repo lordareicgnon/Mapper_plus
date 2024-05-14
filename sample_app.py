@@ -56,10 +56,17 @@ if runmapperplus:
             #csvfile=StringIO(uploaded_file)
             #data = np.loadtxt(uploaded_file, delimiter=',')
             head=st.checkbox("Contains headers", False)
+            
+
+            #if head:
+            #    df=pd.read_csv(uploaded_file)
+            #else:
+            #    df=pd.read_csv(uploaded_file,header=None)
+            df=pd.read_csv(uploaded_file,header=None)
+
+
             if head:
-                df=pd.read_csv(uploaded_file)
-            else:
-                df=pd.read_csv(uploaded_file,header=None)
+                df = df.rename(columns=df.iloc[0]).drop(df.index[0])
 
             st.write('### Data Uploaded')
 
