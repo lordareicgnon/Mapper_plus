@@ -56,6 +56,7 @@ if runmapperplus:
             #csvfile=StringIO(uploaded_file)
             #data = np.loadtxt(uploaded_file, delimiter=',')
             head=st.checkbox("Contains headers", False)
+            transpose=st.checkbox("Transpose Data", False)
             
 
             #if head:
@@ -63,6 +64,9 @@ if runmapperplus:
             #else:
             #    df=pd.read_csv(uploaded_file,header=None)
             df=pd.read_csv(uploaded_file,header=None)
+
+            if transpose:
+                df=df.T
 
 
             if head:
