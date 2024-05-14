@@ -73,7 +73,7 @@ if runmapperplus:
             if head:
                 df = df.rename(columns=df.iloc[0]).drop(df.index[0])
             if ids:
-                df.set_index(df.columns[0])
+                df=df[1:]
 
                 
             st.write('### Data Uploaded')
