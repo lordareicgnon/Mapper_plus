@@ -4,7 +4,7 @@ import kmapper as km
 import sklearn
 from sklearn import ensemble
 from sklearn.decomposition import PCA
-from . import walk_likelihood as wl
+import walk_likelihood as wl
 import importlib
 from sklearn.metrics.cluster import normalized_mutual_info_score as nmi
 mapper = km.KeplerMapper(verbose=1)
